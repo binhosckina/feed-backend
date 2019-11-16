@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import dotenv from 'dotenv'
 
 import routes from './routes'
 
@@ -9,6 +10,8 @@ class App {
 
   public constructor () {
     this.express = express()
+
+    dotenv.config()
 
     this.middlewares()
     this.database()
@@ -21,10 +24,13 @@ class App {
   }
 
   private database (): void {
-    mongoose.connect('mongodb://localhost:27017/tsnode', {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    })
+    mongoose.connect(
+      // 'mongodb://localhost:27017/tsnode',
+      process.env.MONGO_URL,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+      })
   }
 
   private routes (): void {
