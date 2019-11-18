@@ -26,8 +26,13 @@ class App {
   private database (): void {
     mongoose.connect(
       // 'mongodb://localhost:27017/tsnode',
-      process.env.MONGO_URL,
+      'mongodb+srv://cluster0-ru6hn.mongodb.net/Feed?retryWrites=true&w=majority',
+      // process.env.MONGO_URL,
       {
+        auth: {
+          user: process.env.MONGO_USER,
+          password: process.env.MONGO_PASSWORD
+        },
         useNewUrlParser: true,
         useUnifiedTopology: true
       })
